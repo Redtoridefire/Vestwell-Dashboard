@@ -1465,7 +1465,7 @@ export default function VestwellCPODashboard() {
                   </div>
                   <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
                     <div className="flex items-center justify-between mb-1">
-                      <p className="text-sm font-medium text-slate-900">Security doesn't block work</p>
+                      <p className="text-sm font-medium text-slate-900">Security doesn&apos;t block work</p>
                       <span className="text-sm font-bold text-blue-600">7.9/10</span>
                     </div>
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -1522,7 +1522,7 @@ export default function VestwellCPODashboard() {
                     <h4 className="font-semibold text-slate-900">Lower Friction</h4>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">
-                    7.9/10 on "security doesn't block work" - lowest score.
+                    7.9/10 on &ldquo;security doesn&apos;t block work&rdquo; - lowest score.
                     Review approval workflows for delays.
                   </p>
                   <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
@@ -1538,7 +1538,7 @@ export default function VestwellCPODashboard() {
                     <h4 className="font-semibold text-slate-900">Increase Visibility</h4>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">
-                    Continue monthly "Ask Security Anything" sessions.
+                    Continue monthly &ldquo;Ask Security Anything&rdquo; sessions.
                     147 questions in 30 days shows high engagement.
                   </p>
                   <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
