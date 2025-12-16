@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { 
-  Shield, Users, AlertTriangle, CheckCircle, TrendingUp, 
-  Clock, FileText, Target, Activity, Lock, Eye, 
-  BookOpen, Award, Bell, BarChart3, ArrowUpRight, 
-  ArrowDownRight, Info, ChevronRight, X
+import {
+  Shield, Users, AlertTriangle, CheckCircle, TrendingUp,
+  Clock, FileText, Target, Activity, Lock, Eye,
+  BookOpen, Award, Bell, BarChart3, ArrowUpRight,
+  ArrowDownRight, Info, ChevronRight, X, UserCheck,
+  Heart, Layers, GitBranch, Zap, Smile, ThumbsUp,
+  MessageSquare, HelpCircle, TrendingDown, MapPin,
+  Calendar, RefreshCw, ExternalLink, Download
 } from 'lucide-react';
 
 // Type Definitions
@@ -153,7 +156,7 @@ const renderDrillDownContent = (data: DrillDownData) => {
 // Main Dashboard Component
 export default function VestwellCPODashboard() {
   const [drillDownData, setDrillDownData] = useState<DrillDownData | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'culture' | 'access' | 'risk' | 'compliance'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'culture' | 'access' | 'risk' | 'compliance' | 'hrem' | 'sxi' | 'lifecycle'>('overview');
 
   // Realistic metrics based on Vestwell's ~390 employees
   const dashboardData = {
@@ -209,6 +212,37 @@ export default function VestwellCPODashboard() {
         pending: 3,
         expiring: 8
       }
+    },
+    hrem: {
+      lowExposure: { count: 98, percentage: 25.1, avgTrainingHours: 4 },
+      moderateExposure: { count: 156, percentage: 40.0, avgTrainingHours: 8 },
+      highExposure: { count: 118, percentage: 30.3, avgTrainingHours: 16 },
+      criticalExposure: { count: 18, percentage: 4.6, avgTrainingHours: 24 },
+      riskScore: 72,
+      trainingROI: '89%'
+    },
+    sxi: {
+      overallScore: 8.2,
+      understandingScore: 8.5,
+      supportScore: 7.9,
+      psychologicalSafety: 8.4,
+      reportingComfort: 8.1,
+      frustrationIndex: 2.3,
+      npsScore: 42
+    },
+    lifecycle: {
+      hiring: { clarity: '94%', backgroundChecks: 387 },
+      onboarding: { completionRate: '98.2%', avgDays: 3.2 },
+      growth: { privilegeReviews: 47, roleChanges: 23 },
+      roleChange: { avgProcessingDays: 1.2, accessReviews: 100 },
+      exit: { avgOffboardingHours: 2.3, cleanExits: '99.1%' }
+    },
+    dualSSO: {
+      rippling: { users: 234, coverage: '60%', syncStatus: 'Active' },
+      jumpcloud: { users: 156, coverage: '40%', syncStatus: 'Active' },
+      mergeStatus: 'In Progress',
+      targetDate: 'Q2 2025',
+      conflicts: 0
     }
   };
 
@@ -267,6 +301,43 @@ export default function VestwellCPODashboard() {
         { framework: 'FINRA Rule 3110', status: 'Compliant', nextAudit: 'Ongoing', findings: '0', auditor: 'Internal' },
         { framework: 'State Privacy Laws', status: 'Compliant', nextAudit: 'Q4 2025', findings: '0', auditor: 'Privacy Team' }
       ]
+    },
+    hremRoles: {
+      title: 'Human Risk Exposure by Role',
+      data: [
+        { role: 'Finance Team', exposure: 'Critical', employees: 18, training: '24 hrs/yr', dataAccess: 'SSN, ACH, Contributions', lastReview: '7 days ago' },
+        { role: 'Engineering', exposure: 'High', employees: 156, training: '16 hrs/yr', dataAccess: 'Production DB, Customer Data', lastReview: '14 days ago' },
+        { role: 'Customer Success', exposure: 'High', employees: 29, training: '16 hrs/yr', dataAccess: 'PII, Account Details', lastReview: '10 days ago' },
+        { role: 'Product Managers', exposure: 'Moderate', employees: 45, training: '8 hrs/yr', dataAccess: 'Analytics, Metadata', lastReview: '21 days ago' },
+        { role: 'Sales', exposure: 'Moderate', employees: 38, training: '8 hrs/yr', dataAccess: 'CRM, Proposals', lastReview: '18 days ago' },
+        { role: 'Operations', exposure: 'Moderate', employees: 73, training: '8 hrs/yr', dataAccess: 'Operational Systems', lastReview: '12 days ago' },
+        { role: 'Marketing', exposure: 'Low', employees: 23, training: '4 hrs/yr', dataAccess: 'Public Content', lastReview: '30 days ago' },
+        { role: 'Admin/Facilities', exposure: 'Low', employees: 8, training: '4 hrs/yr', dataAccess: 'Limited', lastReview: '25 days ago' }
+      ]
+    },
+    sxiSurvey: {
+      title: 'Security Experience Index - Detailed Results',
+      data: [
+        { metric: 'I understand why security controls exist', score: '8.5/10', trend: '+0.3', category: 'Understanding' },
+        { metric: 'Security team is approachable and helpful', score: '8.3/10', trend: '+0.5', category: 'Support' },
+        { metric: 'I feel safe reporting security mistakes', score: '8.4/10', trend: '+0.2', category: 'Psychological Safety' },
+        { metric: 'I know where to ask security questions', score: '8.1/10', trend: '+0.4', category: 'Support' },
+        { metric: 'Security controls don\'t block my work', score: '7.9/10', trend: '+0.1', category: 'Experience' },
+        { metric: 'Security training is relevant to my role', score: '8.2/10', trend: '+0.6', category: 'Understanding' },
+        { metric: 'I would recommend our security program', score: '8.0/10', trend: '+0.3', category: 'NPS' }
+      ]
+    },
+    lifecycleMetrics: {
+      title: 'Employee Lifecycle Security Metrics',
+      data: [
+        { stage: 'Pre-Hire', metric: 'Background Check Completion', value: '100%', target: '100%', avgDays: 'N/A' },
+        { stage: 'Onboarding', metric: 'Security Training Completion', value: '98.2%', target: '95%', avgDays: '3.2' },
+        { stage: 'Onboarding', metric: 'Account Provisioning Time', value: '1.8 hrs', target: '< 4 hrs', avgDays: 'N/A' },
+        { stage: 'Growth', metric: 'Privilege Reviews (Annual)', value: '47', target: '47', avgDays: 'N/A' },
+        { stage: 'Role Change', metric: 'Access Adjustment Time', value: '1.2 days', target: '< 2 days', avgDays: '1.2' },
+        { stage: 'Exit', metric: 'Account Deprovisioning Time', value: '2.3 hrs', target: '< 4 hrs', avgDays: 'N/A' },
+        { stage: 'Exit', metric: 'Clean Exit Rate', value: '99.1%', target: '> 98%', avgDays: 'N/A' }
+      ]
     }
   };
 
@@ -300,9 +371,12 @@ export default function VestwellCPODashboard() {
       {/* Navigation Tabs */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-1">
+          <div className="flex gap-1 overflow-x-auto">
             {[
               { id: 'overview', label: 'Overview', icon: <BarChart3 className="w-4 h-4" /> },
+              { id: 'hrem', label: 'Risk Exposure Model', icon: <Layers className="w-4 h-4" /> },
+              { id: 'sxi', label: 'Security Experience', icon: <Heart className="w-4 h-4" /> },
+              { id: 'lifecycle', label: 'Employee Journey', icon: <MapPin className="w-4 h-4" /> },
               { id: 'culture', label: 'Security Culture', icon: <Users className="w-4 h-4" /> },
               { id: 'access', label: 'Identity & Access', icon: <Lock className="w-4 h-4" /> },
               { id: 'risk', label: 'Insider Risk', icon: <Eye className="w-4 h-4" /> },
@@ -660,6 +734,217 @@ export default function VestwellCPODashboard() {
 
         {activeTab === 'access' && (
           <div className="space-y-8 animate-fadeIn">
+            {/* Dual SSO Integration Banner */}
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 text-white">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                    <GitBranch className="w-6 h-6" />
+                    Dual SSO Integration Project
+                  </h2>
+                  <p className="text-indigo-100 mb-3">
+                    Merging Rippling + JumpCloud for unified identity management and granular provisioning
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                      Status: {dashboardData.dualSSO.mergeStatus}
+                    </span>
+                    <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                      Target: {dashboardData.dualSSO.targetDate}
+                    </span>
+                    <span className="px-3 py-1 bg-emerald-500 rounded-full text-sm font-bold">
+                      {dashboardData.dualSSO.conflicts} Conflicts
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Dual SSO Overview */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <GitBranch className="w-5 h-5 text-blue-600" />
+                Current SSO Architecture
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Rippling */}
+                <div className="bg-white rounded-xl p-6 border-2 border-blue-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 bg-blue-100 rounded-xl">
+                        <Users className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg">Rippling</h3>
+                        <p className="text-sm text-slate-600">HR-Driven Provisioning</p>
+                      </div>
+                    </div>
+                    <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                      {dashboardData.dualSSO.rippling.coverage}
+                    </span>
+                  </div>
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                      <span className="text-sm text-slate-700">Active Users</span>
+                      <span className="text-sm font-bold text-blue-600">{dashboardData.dualSSO.rippling.users}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                      <span className="text-sm text-slate-700">Sync Status</span>
+                      <span className="text-sm font-bold text-emerald-600">{dashboardData.dualSSO.rippling.syncStatus}</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-slate-200 pt-4">
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Primary Use Cases</p>
+                    <ul className="space-y-1 text-sm text-slate-700">
+                      <li>✓ HR-driven onboarding/offboarding</li>
+                      <li>✓ Google Workspace provisioning</li>
+                      <li>✓ Okta integration</li>
+                      <li>✓ SaaS app management (Slack, Zoom)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* JumpCloud */}
+                <div className="bg-white rounded-xl p-6 border-2 border-purple-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 bg-purple-100 rounded-xl">
+                        <Lock className="w-6 h-6 text-purple-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg">JumpCloud</h3>
+                        <p className="text-sm text-slate-600">Technical Infrastructure</p>
+                      </div>
+                    </div>
+                    <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">
+                      {dashboardData.dualSSO.jumpcloud.coverage}
+                    </span>
+                  </div>
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                      <span className="text-sm text-slate-700">Active Users</span>
+                      <span className="text-sm font-bold text-purple-600">{dashboardData.dualSSO.jumpcloud.users}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                      <span className="text-sm text-slate-700">Sync Status</span>
+                      <span className="text-sm font-bold text-emerald-600">{dashboardData.dualSSO.jumpcloud.syncStatus}</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-slate-200 pt-4">
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Primary Use Cases</p>
+                    <ul className="space-y-1 text-sm text-slate-700">
+                      <li>✓ Engineering workstation access</li>
+                      <li>✓ VPN authentication</li>
+                      <li>✓ Linux/Mac device management</li>
+                      <li>✓ SSH key management</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Merge Strategy */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-blue-600" />
+                Unified SSO Vision (Target State)
+              </h2>
+              <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-6 border-2 border-blue-200">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-3">Single Source of Truth</h4>
+                    <p className="text-sm text-slate-600 mb-3">
+                      Rippling becomes the authoritative HR system. All user provisioning flows from hire date.
+                    </p>
+                    <div className="bg-white rounded-lg p-3 border border-blue-200">
+                      <p className="text-xs text-slate-500 mb-1">Data Flow</p>
+                      <p className="text-sm font-semibold text-slate-900">Rippling → JumpCloud → All Apps</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-3">Granular Provisioning</h4>
+                    <p className="text-sm text-slate-600 mb-3">
+                      JumpCloud manages technical access based on role, department, and HREM tier.
+                    </p>
+                    <div className="bg-white rounded-lg p-3 border border-purple-200">
+                      <p className="text-xs text-slate-500 mb-1">Access Logic</p>
+                      <p className="text-sm font-semibold text-slate-900">Role + HREM Tier = Permissions</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-3">Onboarding/Offboarding</h4>
+                    <p className="text-sm text-slate-600 mb-3">
+                      Automated workflows: HR updates status in Rippling, access changes propagate instantly.
+                    </p>
+                    <div className="bg-white rounded-lg p-3 border border-emerald-200">
+                      <p className="text-xs text-slate-500 mb-1">Target Speed</p>
+                      <p className="text-sm font-semibold text-slate-900">Provision: &lt;1hr | Deprovision: &lt;15min</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-white rounded-lg border border-blue-300">
+                  <div className="flex items-start gap-3">
+                    <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-slate-900 mb-1">CPO Benefit: Unified Employee Experience</p>
+                      <p className="text-sm text-slate-600">
+                        Employees get provisioned on day 1 with zero IT tickets. HR sees real-time access status.
+                        Offboarding is instant and complete - no orphaned accounts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Progress Tracker */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-blue-600" />
+                Integration Milestones
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div className="bg-white rounded-xl p-5 border-2 border-emerald-300">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-slate-900">Phase 1: Discovery</h4>
+                    <CheckCircle className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <p className="text-sm text-slate-600 mb-2">User inventory & app mapping</p>
+                  <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded">COMPLETE</span>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border-2 border-emerald-300">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-slate-900">Phase 2: API Setup</h4>
+                    <CheckCircle className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <p className="text-sm text-slate-600 mb-2">Rippling ↔ JumpCloud sync</p>
+                  <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded">COMPLETE</span>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border-2 border-blue-300">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-slate-900">Phase 3: Pilot</h4>
+                    <RefreshCw className="w-6 h-6 text-blue-600 animate-spin" />
+                  </div>
+                  <p className="text-sm text-slate-600 mb-2">Testing with 25 users (IT/Security)</p>
+                  <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">IN PROGRESS</span>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border-2 border-slate-200">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-slate-900">Phase 4: Rollout</h4>
+                    <Clock className="w-6 h-6 text-slate-400" />
+                  </div>
+                  <p className="text-sm text-slate-600 mb-2">Full deployment to 390 employees</p>
+                  <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded">Q2 2025</span>
+                </div>
+              </div>
+            </section>
+
             <section>
               <h2 className="text-xl font-bold text-slate-900 mb-4">Identity & Access Governance</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -863,6 +1148,736 @@ export default function VestwellCPODashboard() {
                     </div>
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div className="h-full bg-blue-500 rounded-full" style={{ width: '97.4%' }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'hrem' && (
+          <div className="space-y-8 animate-fadeIn">
+            {/* HREM Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold mb-3">Human Risk Exposure Model (HREM)</h2>
+                  <p className="text-blue-100 text-lg max-w-3xl">
+                    Role-based risk classification that ensures security controls are proportional, fair, and effective.
+                    Training and controls scale with actual data access and business criticality.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-blue-100 text-sm mb-1">Overall Risk Score</p>
+                  <p className="text-5xl font-bold">{dashboardData.hrem.riskScore}</p>
+                  <p className="text-blue-100 text-sm mt-1">Training ROI: {dashboardData.hrem.trainingROI}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Exposure Tiers */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Layers className="w-5 h-5 text-blue-600" />
+                Risk Exposure Tiers
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Critical Exposure */}
+                <div className="bg-gradient-to-br from-rose-50 to-rose-100 border-2 border-rose-300 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-rose-900">Critical Exposure</h3>
+                    <AlertTriangle className="w-6 h-6 text-rose-600" />
+                  </div>
+                  <p className="text-4xl font-bold text-rose-700 mb-2">{dashboardData.hrem.criticalExposure.count}</p>
+                  <p className="text-sm text-rose-700 mb-4">{dashboardData.hrem.criticalExposure.percentage}% of workforce</p>
+                  <div className="space-y-2 text-sm text-rose-800">
+                    <p className="font-semibold">Access:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• SSN & Financial Data</li>
+                      <li>• Money Movement</li>
+                      <li>• Contribution Logic</li>
+                    </ul>
+                    <p className="font-semibold mt-3">Training: {dashboardData.hrem.criticalExposure.avgTrainingHours} hrs/year</p>
+                  </div>
+                </div>
+
+                {/* High Exposure */}
+                <div className="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-300 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-amber-900">High Exposure</h3>
+                    <Eye className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <p className="text-4xl font-bold text-amber-700 mb-2">{dashboardData.hrem.highExposure.count}</p>
+                  <p className="text-sm text-amber-700 mb-4">{dashboardData.hrem.highExposure.percentage}% of workforce</p>
+                  <div className="space-y-2 text-sm text-amber-800">
+                    <p className="font-semibold">Access:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Customer PII</li>
+                      <li>• Production Systems</li>
+                      <li>• Account Details</li>
+                    </ul>
+                    <p className="font-semibold mt-3">Training: {dashboardData.hrem.highExposure.avgTrainingHours} hrs/year</p>
+                  </div>
+                </div>
+
+                {/* Moderate Exposure */}
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-blue-900">Moderate Exposure</h3>
+                    <Users className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <p className="text-4xl font-bold text-blue-700 mb-2">{dashboardData.hrem.moderateExposure.count}</p>
+                  <p className="text-sm text-blue-700 mb-4">{dashboardData.hrem.moderateExposure.percentage}% of workforce</p>
+                  <div className="space-y-2 text-sm text-blue-800">
+                    <p className="font-semibold">Access:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Operational Data</li>
+                      <li>• Analytics & Metrics</li>
+                      <li>• Internal Tools</li>
+                    </ul>
+                    <p className="font-semibold mt-3">Training: {dashboardData.hrem.moderateExposure.avgTrainingHours} hrs/year</p>
+                  </div>
+                </div>
+
+                {/* Low Exposure */}
+                <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-emerald-900">Low Exposure</h3>
+                    <CheckCircle className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <p className="text-4xl font-bold text-emerald-700 mb-2">{dashboardData.hrem.lowExposure.count}</p>
+                  <p className="text-sm text-emerald-700 mb-4">{dashboardData.hrem.lowExposure.percentage}% of workforce</p>
+                  <div className="space-y-2 text-sm text-emerald-800">
+                    <p className="font-semibold">Access:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Public Information</li>
+                      <li>• Limited Data Access</li>
+                      <li>• Non-Critical Systems</li>
+                    </ul>
+                    <p className="font-semibold mt-3">Training: {dashboardData.hrem.lowExposure.avgTrainingHours} hrs/year</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* CPO Value Proposition */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-white rounded-xl p-6 border border-slate-200">
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <ThumbsUp className="w-5 h-5 text-blue-600" />
+                  Why CPOs Love HREM
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Reduces Training Burnout</p>
+                      <p className="text-sm text-slate-600">Low-risk roles get 4 hrs/year vs 24 hrs for critical roles</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Fair & Proportional</p>
+                      <p className="text-sm text-slate-600">Controls match actual business risk, not job titles</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Scales Intelligently</p>
+                      <p className="text-sm text-slate-600">Hiring and onboarding adapt to role exposure level</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Improves Retention</p>
+                      <p className="text-sm text-slate-600">Employees feel respected, not over-controlled</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.hremRoles)}
+              >
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <UserCheck className="w-5 h-5 text-blue-600" />
+                  Role-Based Breakdown
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-rose-50 border border-rose-200 rounded-lg">
+                    <div>
+                      <p className="font-medium text-slate-900">Finance Team</p>
+                      <p className="text-xs text-slate-600">SSN, ACH, Contributions</p>
+                    </div>
+                    <span className="px-3 py-1 bg-rose-600 text-white text-xs font-bold rounded-full">CRITICAL</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <div>
+                      <p className="font-medium text-slate-900">Engineering</p>
+                      <p className="text-xs text-slate-600">Production DB, Customer Data</p>
+                    </div>
+                    <span className="px-3 py-1 bg-amber-600 text-white text-xs font-bold rounded-full">HIGH</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div>
+                      <p className="font-medium text-slate-900">Product & Sales</p>
+                      <p className="text-xs text-slate-600">Analytics, CRM</p>
+                    </div>
+                    <span className="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">MODERATE</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <div>
+                      <p className="font-medium text-slate-900">Marketing & Admin</p>
+                      <p className="text-xs text-slate-600">Public Content, Limited Access</p>
+                    </div>
+                    <span className="px-3 py-1 bg-emerald-600 text-white text-xs font-bold rounded-full">LOW</span>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center text-xs text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for full role breakdown
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'sxi' && (
+          <div className="space-y-8 animate-fadeIn">
+            {/* SXI Header */}
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-8 text-white">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold mb-3">Security Experience Index (SXI)</h2>
+                  <p className="text-emerald-100 text-lg max-w-3xl">
+                    Measuring how security <em>feels</em> to employees, not just how effective it is.
+                    Security that causes fear or confusion creates shadow IT and disengagement.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-emerald-100 text-sm mb-1">Overall SXI Score</p>
+                  <p className="text-5xl font-bold">{dashboardData.sxi.overallScore}/10</p>
+                  <p className="text-emerald-100 text-sm mt-1">Target: &gt; 8.0</p>
+                </div>
+              </div>
+            </div>
+
+            {/* SXI Metrics */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Heart className="w-5 h-5 text-blue-600" />
+                Experience Metrics
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <MetricCard
+                  title="Understanding Score"
+                  value={`${dashboardData.sxi.understandingScore}/10`}
+                  change="+0.4"
+                  trend="up"
+                  icon={<BookOpen className="w-6 h-6 text-blue-600" />}
+                  status="good"
+                />
+                <MetricCard
+                  title="Support Score"
+                  value={`${dashboardData.sxi.supportScore}/10`}
+                  change="+0.3"
+                  trend="up"
+                  icon={<MessageSquare className="w-6 h-6 text-blue-600" />}
+                  status="good"
+                />
+                <MetricCard
+                  title="Psychological Safety"
+                  value={`${dashboardData.sxi.psychologicalSafety}/10`}
+                  change="+0.2"
+                  trend="up"
+                  icon={<Shield className="w-6 h-6 text-emerald-600" />}
+                  status="good"
+                />
+                <MetricCard
+                  title="Reporting Comfort"
+                  value={`${dashboardData.sxi.reportingComfort}/10`}
+                  change="+0.5"
+                  trend="up"
+                  icon={<Bell className="w-6 h-6 text-emerald-600" />}
+                  status="good"
+                />
+                <MetricCard
+                  title="Frustration Index"
+                  value={`${dashboardData.sxi.frustrationIndex}/10`}
+                  change="-0.4"
+                  trend="down"
+                  icon={<TrendingDown className="w-6 h-6 text-emerald-600" />}
+                  status="good"
+                />
+                <MetricCard
+                  title="NPS Score"
+                  value={dashboardData.sxi.npsScore}
+                  change="+8"
+                  trend="up"
+                  icon={<ThumbsUp className="w-6 h-6 text-blue-600" />}
+                  status="good"
+                />
+              </div>
+            </section>
+
+            {/* Survey Insights */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.sxiSurvey)}
+              >
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <Smile className="w-5 h-5 text-blue-600" />
+                  Employee Feedback
+                </h3>
+                <div className="space-y-3">
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-sm font-medium text-slate-900">I understand why controls exist</p>
+                      <span className="text-sm font-bold text-emerald-600">8.5/10</span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: '85%' }}></div>
+                    </div>
+                  </div>
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-sm font-medium text-slate-900">Security team is approachable</p>
+                      <span className="text-sm font-bold text-emerald-600">8.3/10</span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: '83%' }}></div>
+                    </div>
+                  </div>
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-sm font-medium text-slate-900">Safe to report mistakes</p>
+                      <span className="text-sm font-bold text-emerald-600">8.4/10</span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: '84%' }}></div>
+                    </div>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-sm font-medium text-slate-900">Security doesn't block work</p>
+                      <span className="text-sm font-bold text-blue-600">7.9/10</span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-500 rounded-full" style={{ width: '79%' }}></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center text-xs text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for detailed survey results
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-slate-200">
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <HelpCircle className="w-5 h-5 text-blue-600" />
+                  Why This Matters to CPOs
+                </h3>
+                <div className="space-y-4">
+                  <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+                    <p className="font-semibold text-slate-900 mb-2">Reduces Shadow IT</p>
+                    <p className="text-sm text-slate-600">
+                      When employees feel frustrated or confused by security, they find workarounds.
+                      High SXI scores mean employees work <em>with</em> security, not around it.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg">
+                    <p className="font-semibold text-slate-900 mb-2">Psychological Safety</p>
+                    <p className="text-sm text-slate-600">
+                      Measuring whether employees feel safe admitting mistakes is a leading indicator
+                      of culture health - a core CPO metric.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg">
+                    <p className="font-semibold text-slate-900 mb-2">Engagement & Retention</p>
+                    <p className="text-sm text-slate-600">
+                      Security perceived as punitive drives disengagement. High SXI correlates with
+                      overall employee satisfaction scores.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Action Items */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4">Improvement Opportunities</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="bg-white rounded-xl p-5 border border-slate-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 bg-amber-100 rounded-lg">
+                      <AlertTriangle className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <h4 className="font-semibold text-slate-900">Lower Friction</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    7.9/10 on "security doesn't block work" - lowest score.
+                    Review approval workflows for delays.
+                  </p>
+                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                    View workflow analysis →
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border border-slate-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 bg-blue-100 rounded-lg">
+                      <MessageSquare className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h4 className="font-semibold text-slate-900">Increase Visibility</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    Continue monthly "Ask Security Anything" sessions.
+                    147 questions in 30 days shows high engagement.
+                  </p>
+                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                    View question trends →
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border border-slate-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 bg-emerald-100 rounded-lg">
+                      <BookOpen className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <h4 className="font-semibold text-slate-900">Role-Based Training</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    8.2/10 on relevance. Pair with HREM to make training even more targeted to actual risk.
+                  </p>
+                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                    View training matrix →
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'lifecycle' && (
+          <div className="space-y-8 animate-fadeIn">
+            {/* Lifecycle Header */}
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
+              <div>
+                <h2 className="text-3xl font-bold mb-3">Security Enablement Lifecycle</h2>
+                <p className="text-indigo-100 text-lg max-w-4xl">
+                  Security mapped to the employee journey. Controls evolve with roles - from hiring through exit -
+                  making security feel integrated, not bolted on.
+                </p>
+              </div>
+            </div>
+
+            {/* Journey Stages */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-blue-600" />
+                Employee Security Journey
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                {/* Hiring */}
+                <div className="bg-white rounded-xl border-2 border-blue-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <UserCheck className="w-6 h-6" />
+                        <h3 className="text-xl font-bold">1. Hiring & Pre-Boarding</h3>
+                      </div>
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                        Before Day 1
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</p>
+                        <p className="font-semibold text-slate-900">Role Clarity & Intent</p>
+                        <p className="text-sm text-slate-600 mt-1">Define what access this role needs and why</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Security Actions</p>
+                        <ul className="text-sm text-slate-700 space-y-1">
+                          <li>✓ Background check completion: {dashboardData.lifecycle.hiring.clarity}</li>
+                          <li>✓ Access requirements documented</li>
+                          <li>✓ HREM tier assigned to role</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Metrics</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 bg-emerald-50 rounded">
+                            <span className="text-sm text-slate-700">BG Checks Completed</span>
+                            <span className="text-sm font-bold text-emerald-600">{dashboardData.lifecycle.hiring.backgroundChecks}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Onboarding */}
+                <div className="bg-white rounded-xl border-2 border-emerald-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Zap className="w-6 h-6" />
+                        <h3 className="text-xl font-bold">2. Onboarding</h3>
+                      </div>
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                        Days 1-30
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</p>
+                        <p className="font-semibold text-slate-900">Expectations & Habits</p>
+                        <p className="text-sm text-slate-600 mt-1">Set security expectations early, build good habits</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Security Actions</p>
+                        <ul className="text-sm text-slate-700 space-y-1">
+                          <li>✓ Role-based security training</li>
+                          <li>✓ Account provisioning (avg: 1.8 hrs)</li>
+                          <li>✓ MFA setup & password manager</li>
+                          <li>✓ Data classification overview</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Metrics</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 bg-emerald-50 rounded">
+                            <span className="text-sm text-slate-700">Training Complete</span>
+                            <span className="text-sm font-bold text-emerald-600">{dashboardData.lifecycle.onboarding.completionRate}</span>
+                          </div>
+                          <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
+                            <span className="text-sm text-slate-700">Avg Time to Access</span>
+                            <span className="text-sm font-bold text-blue-600">{dashboardData.lifecycle.onboarding.avgDays} days</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Growth */}
+                <div className="bg-white rounded-xl border-2 border-purple-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <TrendingUp className="w-6 h-6" />
+                        <h3 className="text-xl font-bold">3. Growth & Tenure</h3>
+                      </div>
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                        Ongoing
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</p>
+                        <p className="font-semibold text-slate-900">Privilege Evolution</p>
+                        <p className="text-sm text-slate-600 mt-1">Access grows with responsibility, reviewed regularly</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Security Actions</p>
+                        <ul className="text-sm text-slate-700 space-y-1">
+                          <li>✓ Annual access reviews</li>
+                          <li>✓ Privilege escalation monitoring</li>
+                          <li>✓ Continuous training (HREM-based)</li>
+                          <li>✓ Security champion opportunities</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Metrics</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 bg-purple-50 rounded">
+                            <span className="text-sm text-slate-700">Privilege Reviews</span>
+                            <span className="text-sm font-bold text-purple-600">{dashboardData.lifecycle.growth.privilegeReviews}</span>
+                          </div>
+                          <div className="flex items-center justify-between p-2 bg-indigo-50 rounded">
+                            <span className="text-sm text-slate-700">Role Changes (YTD)</span>
+                            <span className="text-sm font-bold text-indigo-600">{dashboardData.lifecycle.growth.roleChanges}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Role Change */}
+                <div className="bg-white rounded-xl border-2 border-amber-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-amber-500 to-amber-600 p-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <RefreshCw className="w-6 h-6" />
+                        <h3 className="text-xl font-bold">4. Role Change / Transfer</h3>
+                      </div>
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                        As Needed
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</p>
+                        <p className="font-semibold text-slate-900">Access Recalibration</p>
+                        <p className="text-sm text-slate-600 mt-1">Remove old access, grant new - prevent accumulation</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Security Actions</p>
+                        <ul className="text-sm text-slate-700 space-y-1">
+                          <li>✓ Old role access removal</li>
+                          <li>✓ New role access provisioning</li>
+                          <li>✓ HREM tier reassessment</li>
+                          <li>✓ Updated training requirements</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Metrics</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 bg-amber-50 rounded">
+                            <span className="text-sm text-slate-700">Avg Processing</span>
+                            <span className="text-sm font-bold text-amber-600">{dashboardData.lifecycle.roleChange.avgProcessingDays} days</span>
+                          </div>
+                          <div className="flex items-center justify-between p-2 bg-emerald-50 rounded">
+                            <span className="text-sm text-slate-700">Access Reviews</span>
+                            <span className="text-sm font-bold text-emerald-600">{dashboardData.lifecycle.roleChange.accessReviews}%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Exit */}
+                <div className="bg-white rounded-xl border-2 border-rose-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Lock className="w-6 h-6" />
+                        <h3 className="text-xl font-bold">5. Exit / Offboarding</h3>
+                      </div>
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                        Final Day
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</p>
+                        <p className="font-semibold text-slate-900">Clean Separation</p>
+                        <p className="text-sm text-slate-600 mt-1">Complete deprovisioning, no lingering access</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Security Actions</p>
+                        <ul className="text-sm text-slate-700 space-y-1">
+                          <li>✓ All account deactivation</li>
+                          <li>✓ Physical access revocation</li>
+                          <li>✓ Data return verification</li>
+                          <li>✓ Exit interview (security topics)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Metrics</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 bg-rose-50 rounded">
+                            <span className="text-sm text-slate-700">Avg Deprovision</span>
+                            <span className="text-sm font-bold text-rose-600">{dashboardData.lifecycle.exit.avgOffboardingHours} hrs</span>
+                          </div>
+                          <div className="flex items-center justify-between p-2 bg-emerald-50 rounded">
+                            <span className="text-sm text-slate-700">Clean Exits</span>
+                            <span className="text-sm font-bold text-emerald-600">{dashboardData.lifecycle.exit.cleanExits}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Lifecycle Benefits & Metrics */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.lifecycleMetrics)}
+              >
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5 text-blue-600" />
+                  Lifecycle Performance Metrics
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                    <span className="text-sm text-slate-700">Onboarding Training Completion</span>
+                    <span className="text-sm font-bold text-emerald-600">98.2%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                    <span className="text-sm text-slate-700">Avg Time to Provision Access</span>
+                    <span className="text-sm font-bold text-emerald-600">1.8 hrs</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                    <span className="text-sm text-slate-700">Role Change Processing</span>
+                    <span className="text-sm font-bold text-emerald-600">1.2 days</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                    <span className="text-sm text-slate-700">Clean Exit Rate</span>
+                    <span className="text-sm font-bold text-emerald-600">99.1%</span>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center text-xs text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for detailed lifecycle metrics
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-slate-200">
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-blue-600" />
+                  CPO Partnership Value
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Integrated, Not Bolted On</p>
+                      <p className="text-sm text-slate-600">Security becomes part of the employee journey, not separate compliance</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Smoother Onboarding</p>
+                      <p className="text-sm text-slate-600">HR knows exactly what security needs at each stage - no surprises</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">Reduces Access Creep</p>
+                      <p className="text-sm text-slate-600">Role changes trigger access reviews automatically</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-slate-900">HR Controls Risk</p>
+                      <p className="text-sm text-slate-600">People Ops drives the lifecycle, security supports it</p>
                     </div>
                   </div>
                 </div>
