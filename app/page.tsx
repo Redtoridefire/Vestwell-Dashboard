@@ -929,15 +929,26 @@ export default function VestwellCPODashboard() {
                           <span>8.3% clicks ⬇️</span>
                         </div>
                       </div>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setDrillDownData(drillDownDetails.phishing);
-                        }}
-                        className="mt-4 w-full bg-white/20 hover:bg-white/30 rounded-lg py-2 text-sm font-medium transition-colors"
-                      >
-                        View Detailed Report
-                      </button>
+                      <div className="mt-4 space-y-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDrillDownData(drillDownDetails.phishingByDepartment);
+                          }}
+                          className="w-full bg-white/20 hover:bg-white/30 rounded-lg py-2 text-sm font-medium transition-colors"
+                        >
+                          View Click Rate by Department
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDrillDownData(drillDownDetails.phishingByRole);
+                          }}
+                          className="w-full bg-white/20 hover:bg-white/30 rounded-lg py-2 text-sm font-medium transition-colors"
+                        >
+                          View Report Rate by Role
+                        </button>
+                      </div>
                     </div>
                   }
                 />
@@ -1047,6 +1058,15 @@ export default function VestwellCPODashboard() {
                           <span>Direct channel to security team</span>
                         </li>
                       </ul>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDrillDownData(drillDownDetails.securityChampionsByDept);
+                        }}
+                        className="mt-4 w-full bg-white/20 hover:bg-white/30 rounded-lg py-2 text-sm font-medium transition-colors"
+                      >
+                        View Champions by Department
+                      </button>
                     </div>
                   }
                 />
@@ -1288,10 +1308,17 @@ export default function VestwellCPODashboard() {
                     <h4 className="font-semibold text-slate-900">Phase 4: Rollout</h4>
                     <Clock className="w-6 h-6 text-slate-400" />
                   </div>
-                  <p className="text-sm text-slate-600 mb-2">Full deployment to 390 employees</p>
+                  <p className="text-sm text-slate-600 mb-2">Full deployment to 450 employees</p>
                   <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded">Q2 2025</span>
                 </div>
               </div>
+              <button
+                onClick={() => setDrillDownData(drillDownDetails.integrationMilestonesDetailed)}
+                className="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+              >
+                View Detailed Integration Plan
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </section>
 
             <section>
@@ -1311,6 +1338,7 @@ export default function VestwellCPODashboard() {
                   trend="down"
                   icon={<AlertTriangle className="w-6 h-6 text-amber-600" />}
                   status="warning"
+                  onClick={() => setDrillDownData(drillDownDetails.orphanedAccountsProcess)}
                 />
                 <MetricCard
                   title="MFA Adoption"
@@ -1319,12 +1347,16 @@ export default function VestwellCPODashboard() {
                   trend="up"
                   icon={<Shield className="w-6 h-6 text-emerald-600" />}
                   status="good"
+                  onClick={() => setDrillDownData(drillDownDetails.mfaDetails)}
                 />
               </div>
             </section>
 
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl p-6 border border-slate-200">
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.reviewStatusDetails)}
+              >
                 <h3 className="font-semibold text-slate-900 mb-4">Access Review Status</h3>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-amber-50 border border-amber-200 rounded-lg">
@@ -1354,6 +1386,10 @@ export default function VestwellCPODashboard() {
                       {dashboardData.identityAccess.sodViolations}
                     </span>
                   </div>
+                </div>
+                <div className="mt-4 flex items-center text-xs text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for detailed review status
                 </div>
               </div>
 
@@ -1439,10 +1475,13 @@ export default function VestwellCPODashboard() {
                       2 users
                     </span>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                  <div
+                    className="flex items-center justify-between p-3 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors"
+                    onClick={() => setDrillDownData(drillDownDetails.insiderRiskFailedLogins)}
+                  >
                     <span className="text-sm text-slate-700">Multiple failed login attempts</span>
                     <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
-                      1 user
+                      Details →
                     </span>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
@@ -1451,10 +1490,13 @@ export default function VestwellCPODashboard() {
                       1 user
                     </span>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                  <div
+                    className="flex items-center justify-between p-3 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors"
+                    onClick={() => setDrillDownData(drillDownDetails.insiderRiskContractorAccess)}
+                  >
                     <span className="text-sm text-slate-700">Contractor access expiring</span>
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-                      18 users
+                      18 users - Details →
                     </span>
                   </div>
                 </div>
@@ -1499,6 +1541,96 @@ export default function VestwellCPODashboard() {
                       <div className="h-full bg-blue-500 rounded-full" style={{ width: '97.4%' }}></div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Continuous Monitoring Section */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-blue-600" />
+                Continuous Monitoring
+              </h2>
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.continuousMonitoring)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg border border-emerald-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">Anomalous Login Detection</h4>
+                      <CheckCircle className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">Okta ThreatInsight + SIEM</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-emerald-600">92%</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">After-hours Access Monitoring</h4>
+                      <Activity className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">SIEM + UEBA</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-blue-600">95%</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">Data Exfiltration Detection</h4>
+                      <Shield className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">DLP + CASB</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-purple-600">98%</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg border border-indigo-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">Privileged Command Monitoring</h4>
+                      <Lock className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">Teleport + Splunk</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-indigo-600">100%</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg border border-amber-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">Failed Authentication Tracking</h4>
+                      <AlertTriangle className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">SIEM aggregation</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-amber-600">68% (tuning)</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg border border-cyan-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-slate-900">Insider Threat Scoring</h4>
+                      <Eye className="w-5 h-5 text-cyan-600" />
+                    </div>
+                    <p className="text-sm text-slate-600 mb-2">UEBA platform</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Effectiveness</span>
+                      <span className="text-sm font-bold text-cyan-600">89%</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center justify-center text-sm text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for detailed control metrics and alert volumes
                 </div>
               </div>
             </section>
@@ -2343,7 +2475,10 @@ export default function VestwellCPODashboard() {
             <section>
               <h2 className="text-xl font-bold text-slate-900 mb-4">Audit Readiness</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="bg-white rounded-xl p-6 border border-slate-200">
+                <div
+                  className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => setDrillDownData(drillDownDetails.controlEffectivenessDetails)}
+                >
                   <h3 className="font-semibold text-slate-900 mb-4">Control Effectiveness</h3>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
@@ -2371,6 +2506,10 @@ export default function VestwellCPODashboard() {
                       </span>
                     </div>
                   </div>
+                  <div className="mt-4 flex items-center text-xs text-slate-500">
+                    <ChevronRight className="w-4 h-4" />
+                    Click for detailed control testing results
+                  </div>
                 </div>
 
                 <div className="bg-white rounded-xl p-6 border border-slate-200">
@@ -2395,7 +2534,10 @@ export default function VestwellCPODashboard() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 border border-slate-200">
+                <div
+                  className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => setDrillDownData(drillDownDetails.upcomingReviewsDetailed)}
+                >
                   <h3 className="font-semibold text-slate-900 mb-4">Upcoming Reviews</h3>
                   <div className="space-y-3">
                     <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
@@ -2411,6 +2553,154 @@ export default function VestwellCPODashboard() {
                       <p className="text-xs text-slate-600 mt-1">Quarterly - Ongoing</p>
                     </div>
                   </div>
+                  <div className="mt-4 flex items-center text-xs text-slate-500">
+                    <ChevronRight className="w-4 h-4" />
+                    Click for detailed timelines and auditor notes
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Gap Analysis Section */}
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Target className="w-5 h-5 text-blue-600" />
+                Gap Analysis & Framework Compliance
+              </h2>
+              <div
+                className="bg-white rounded-xl p-6 border border-slate-200 cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setDrillDownData(drillDownDetails.gapAnalysisFrameworks)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">SOC 2 Type II</h4>
+                      <CheckCircle className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Audit Ready</span>
+                        <span className="text-xs font-bold text-blue-600">Yes</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Compliance</span>
+                        <span className="text-xs font-bold text-blue-600">98%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Next Audit</span>
+                        <span className="text-xs font-bold text-slate-700">Q1 2026</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg border border-emerald-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">PCI-DSS v4.0.1</h4>
+                      <CheckCircle className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Audit Ready</span>
+                        <span className="text-xs font-bold text-emerald-600">Yes</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Compliance</span>
+                        <span className="text-xs font-bold text-emerald-600">100%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Next Audit</span>
+                        <span className="text-xs font-bold text-slate-700">Q2 2025</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">SEC/FINRA</h4>
+                      <CheckCircle className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Audit Ready</span>
+                        <span className="text-xs font-bold text-purple-600">Yes</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Compliance</span>
+                        <span className="text-xs font-bold text-purple-600">100%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Next Review</span>
+                        <span className="text-xs font-bold text-slate-700">Q3 2025</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg border border-indigo-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">Privacy Laws (CCPA/CPRA)</h4>
+                      <CheckCircle className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Audit Ready</span>
+                        <span className="text-xs font-bold text-indigo-600">Yes</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Compliance</span>
+                        <span className="text-xs font-bold text-indigo-600">97%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Next Review</span>
+                        <span className="text-xs font-bold text-slate-700">Q4 2025</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg border border-amber-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">NIST CSF</h4>
+                      <AlertTriangle className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Audit Ready</span>
+                        <span className="text-xs font-bold text-amber-600">Partial</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Compliance</span>
+                        <span className="text-xs font-bold text-amber-600">85%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Next Review</span>
+                        <span className="text-xs font-bold text-slate-700">Internal</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg border border-cyan-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-900">Overall Status</h4>
+                      <Shield className="w-5 h-5 text-cyan-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Frameworks</span>
+                        <span className="text-xs font-bold text-cyan-600">6 Total</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Avg Compliance</span>
+                        <span className="text-xs font-bold text-cyan-600">96.3%</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">Critical Gaps</span>
+                        <span className="text-xs font-bold text-emerald-600">None</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center justify-center text-sm text-slate-500">
+                  <ChevronRight className="w-4 h-4" />
+                  Click for detailed gap analysis and remediation plans
                 </div>
               </div>
             </section>
